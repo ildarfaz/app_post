@@ -1,8 +1,16 @@
+import { FC } from "react";
+import styles from "./button.module.scss";
 
-
-export const Table = () => {
+type IButton = {
+    title: string;
+    onClick: () => void;
+}
+export const Button: FC<IButton> = ({ title, onClick }) => {
     return (
-        <div>Table</div>
+        <div className={styles.box}>
+            <button onClick={onClick}>{title}</button>
+        </div>
+
     )
 
 }
