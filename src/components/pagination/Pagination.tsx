@@ -1,25 +1,30 @@
-import { useState } from "react";
+import { FC } from "react";
 import { Button } from "../ui/button/Button";
 import styles from "./pagination.module.scss";
 
-export const Pagination = () => {
-    const pages = [1, 2, 3, 4, 5];
-    const [activePage, setActivPage] = useState(1);
+interface IPagitation {
+    total: number | undefined;
+    activePage: number;
+    onChangePage: (nowPage: number) => void;
+}
+
+export const Pagination: FC<IPagitation> = ({ total = 0, activePage, onChangePage }) => {
+    const pages = Array.from(Array(Math.floor(total / 10) + 1).keys()).slice(1);
     const handlerPages = (page: number) => {
-        setActivPage(page);
+        onChangePage(page);
     }
     const pagesList = () => {
         return (
-            <div className={styles.pages}>{pages.map((page) => {
-                return <Button key={page} title={page.toString()}
-                    onClick={() => handlerPages(page)} active={page === activePage} />
+            <div className={styles.pages}>{pages.map((page, index) => {
+                return <Button key={page + index}
+                    onClick={() => handlerPages(page)} active={activePage === page} >{(page).toString()}</Button>
             })}</div>
         )
     }
     return <div className={styles.box}>
-        <Button title="Назад" onClick={() => activePage !== pages[0] && handlerPages(activePage - 1)} />
+        <Button onClick={() => activePage !== pages[0] && handlerPages(activePage - 1)}>{"Назад"}</Button>
         {pagesList()}
-        <Button title="Далее" onClick={() => activePage !== pages.length && handlerPages(activePage + 1)} />
-    </div> 
+        <Button onClick={() => activePage !== pages.length && handlerPages(activePage+ 1)} >{"Далее"}</Button>
+    </div>
 
 }

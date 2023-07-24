@@ -2,12 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
     button {
         font-size: 2.4rem;
         font-weight: 500;
-        background: white;
-
+        background: none;
+        cursor: pointer;
     }
 
     .active {

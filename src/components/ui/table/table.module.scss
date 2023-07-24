@@ -7,18 +7,34 @@
 
     table,
     th {
-        color: white;
         background: #474955;
         height: 54px;
-        font-size: 1.4rem;
-        font-weight: 600;
+
+        th:nth-child(1) {
+            width: 110px;
+        }
+
+        th:nth-child(2) {
+            width: 40%;
+        }
+
+        span {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+    }
+
+
+    td:nth-child(1) {
+        text-align: center;
     }
 
     td {
-        height: 64px;
+        height: 56px;
+        padding: 10px;
         background: white;
         color: #474955;
-        text-align: center;
         font-size: 1.3rem;
         font-weight: 500;
         border: 1px solid #E3E6EC;

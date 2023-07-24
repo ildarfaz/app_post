@@ -1,5 +1,10 @@
 .box {
     display: grid;
-    padding: 10px 75px;
-    gap: 10px;
+    padding: 23px 78px;
+    gap: 15px;
+
+    p {
+        font-size: 3.2rem;
+        text-align: center;
+    }
 }
