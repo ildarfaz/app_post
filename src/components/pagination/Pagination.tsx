@@ -27,4 +27,3 @@ export const Pagination: FC<IPagitation> = ({ total = 0, activePage, onChangePag
         <Button onClick={() => activePage !== pages.length && handlerPages(activePage + 1)} >{"Далее"}</Button>
     </div>
 }
-taf
