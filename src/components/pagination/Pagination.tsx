@@ -24,7 +24,7 @@ export const Pagination: FC<IPagitation> = ({ total = 0, activePage, onChangePag
     return <div className={styles.box}>
         <Button onClick={() => activePage !== pages[0] && handlerPages(activePage - 1)}>{"Назад"}</Button>
         {pagesList()}
-        <Button onClick={() => activePage !== pages.length && handlerPages(activePage+ 1)} >{"Далее"}</Button>
+        <Button onClick={() => activePage !== pages.length && handlerPages(activePage + 1)} >{"Далее"}</Button>
     </div>
-
 }
+taf
