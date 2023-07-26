@@ -1,25 +1,39 @@
 import { FC } from 'react'
-import { IPosts } from '../../../types/posts'
 import { Button } from '../button/Button'
 import styles from './table.module.scss'
+import { ReactComponent as IconDown } from '../../../assets/img/down.svg';
+import { ITable, enumDirection } from '../../../types/common';
 
-const headlines = ['ID', 'Заголовок', 'Описание']
+const headlines = { id: 'ID', title: 'Заголовок', body: 'Описание' };
 
-const tableTh = headlines.map((headline, index) => {
-  return (
-    <th key={headline + index}>
-      <Button onClick={() => console.log({ headline })}>
-        <>
-          <span>{headline}</span>
-        </>
-      </Button>
-    </th>
-  )
-})
+export const Table: FC<ITable> = ({ posts, sort, onChangeSort }) => {
 
-export const Table: FC<IPosts> = ({ posts }) => {
+  const handlerSort = (headline: string) => {
+    onChangeSort((prev) => ({
+      column: headline,
+      direction: prev.direction !== enumDirection.ASC ?
+        enumDirection.ASC : enumDirection.DESC
+    }));
+  }
 
-  const tableTd = posts?.length ? posts.map(({ id, title, body }) => {
+  const tableTh = Object.keys(headlines).map((headline, index) => {
+
+    return (
+      <th key={headline + index}>
+        <Button onClick={() => handlerSort(headline)}>
+          <>
+            <span>{headlines[headline]}</span>
+            {
+              <IconDown className={sort.column === headline ?
+                sort.direction !== enumDirection.ASC ? styles.iconUp : "" : ""} />}
+          </>
+        </Button>
+      </th>
+    )
+  })
+
+  const tableTd = posts?.map(({ id, title, body }) => {
+
     return (
       <tr key={id}>
         <td>{id}
@@ -30,9 +44,8 @@ export const Table: FC<IPosts> = ({ posts }) => {
         </td>
       </tr>
     )
-  }) : <tr>
-    <td colSpan={3}>Не найдено</td>
-  </tr>
+  });
+
   return (
     <div className={styles.box}>
       <table>
@@ -41,9 +54,11 @@ export const Table: FC<IPosts> = ({ posts }) => {
             {tableTh}
           </tr>
         </thead>
-        <tbody>
-          {tableTd}
-        </tbody>
+        {!posts?.length ?
+          <p>Не найдено!</p> :
+          <tbody>
+            {tableTd}
+          </tbody>}
       </table>
     </div>
   )

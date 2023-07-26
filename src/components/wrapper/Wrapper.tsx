@@ -9,13 +9,12 @@ import { enumDirection } from "../../types/common";
 export const Wrapper = () => {
     const [query, setQuery] = useState("");
     const [page, setPage] = useState(1);
-    const [sortColumn, setSortColumn] = useState("id");
-    const [direction, setDirection] = useState(enumDirection.ASC);
-    const { data, isLoading } = useGetPostsQuery({ query, page, sortColumn, direction });
+    const [sort, setSort] = useState({ column: "id", direction: enumDirection.DESC });
+    const { data, isLoading } = useGetPostsQuery({ query, page, sortColumn: sort.column, direction: sort.direction });
     return <div className={styles.box}>
-        <Search onSearch={setQuery} />
-        {isLoading && <p>Идет загрузка...</p>}
-        {!isLoading && <><Content posts={data?.posts} />
-            <Pagination total={data?.total} activePage={page} onChangePage={setPage} /></>}
+        <Search onSearch={setQuery} onChangePage={setPage} />
+        {isLoading ? <p>Идет загрузка...</p> :
+            <><Content posts={data?.posts} sort={sort} onChangeSort = {setSort}/>
+                <Pagination total={data?.total} activePage={page} onChangePage={setPage} /></>}
     </div>
 }

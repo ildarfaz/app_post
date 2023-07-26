@@ -1,12 +1,12 @@
 import { FC } from "react"
-import { IPosts } from "../../types/posts"
 import { Table } from "../ui/table/Table"
+import { IContent } from "../../types/common"
 
-export const Content: FC<IPosts> = ({ posts }) => {
+export const Content: FC<IContent> = ({ posts, sort, onChangeSort }) => {
 
     return (
         <div>
-            <Table posts = {posts}/>
+            <Table posts = {posts} sort = {sort} onChangeSort = {onChangeSort}/>
         </div>
     )
 }
