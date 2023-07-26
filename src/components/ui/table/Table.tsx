@@ -4,6 +4,11 @@ import styles from './table.module.scss'
 import { ReactComponent as IconDown } from '../../../assets/img/down.svg';
 import { ITable, enumDirection } from '../../../types/common';
 
+interface IHeadlines {
+  id: string;
+  title: string;
+  body: string;
+}
 const headlines = { id: 'ID', title: 'Заголовок', body: 'Описание' };
 
 export const Table: FC<ITable> = ({ posts, sort, onChangeSort }) => {
@@ -22,7 +27,7 @@ export const Table: FC<ITable> = ({ posts, sort, onChangeSort }) => {
       <th key={headline + index}>
         <Button onClick={() => handlerSort(headline)}>
           <>
-            <span>{headlines[headline]}</span>
+            <span>{headlines[headline as keyof IHeadlines]}</span>
             {
               <IconDown className={sort.column === headline ?
                 sort.direction !== enumDirection.ASC ? styles.iconUp : "" : ""} />}
