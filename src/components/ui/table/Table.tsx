@@ -12,12 +12,12 @@ interface IHeadlines {
 const headlines = { id: 'ID', title: 'Заголовок', body: 'Описание' };
 
 export const Table: FC<ITable> = ({ posts, sort, onChangeSort }) => {
-
+  console.log(sort);
   const handlerSort = (headline: string) => {
     onChangeSort((prev) => ({
       column: headline,
-      direction: prev.direction !== enumDirection.ASC ?
-        enumDirection.ASC : enumDirection.DESC
+      direction: prev.column === headline ? prev.direction === enumDirection.ASC ?
+        enumDirection.DESC : enumDirection.ASC : enumDirection.DESC
     }));
   }
 
@@ -29,7 +29,7 @@ export const Table: FC<ITable> = ({ posts, sort, onChangeSort }) => {
           <>
             <span>{headlines[headline as keyof IHeadlines]}</span>
             {
-              <IconDown className={
+              <IconDown className={sort.column === headline &&
                 sort.direction !== enumDirection.ASC ? styles.iconUp : ""} />}
           </>
         </Button>
