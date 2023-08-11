@@ -12,7 +12,7 @@ interface IHeadlines {
 const headlines = { id: 'ID', title: 'Заголовок', body: 'Описание' };
 
 export const Table: FC<ITable> = ({ posts, sort, onChangeSort }) => {
-  console.log(sort);
+
   const handlerSort = (headline: string) => {
     onChangeSort((prev) => ({
       column: headline,
