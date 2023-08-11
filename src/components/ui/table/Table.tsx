@@ -29,8 +29,8 @@ export const Table: FC<ITable> = ({ posts, sort, onChangeSort }) => {
           <>
             <span>{headlines[headline as keyof IHeadlines]}</span>
             {
-              <IconDown className={sort.column === headline ?
-                sort.direction !== enumDirection.ASC ? styles.iconUp : "" : ""} />}
+              <IconDown className={
+                sort.direction !== enumDirection.ASC ? styles.iconUp : ""} />}
           </>
         </Button>
       </th>
